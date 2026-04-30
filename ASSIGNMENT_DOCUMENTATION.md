@@ -187,13 +187,13 @@ Inside the run() method in the Process class.
 
 **Code snippet**:
 ```java
-public static final Semaphore cpuSemaphore = new Semaphore(1);
 
-// PcpuSemaphore.acquire();
+
+SharedResources.cpuSemaphore.acquire();
 try {
     // process execution
 } finally {
-    cpuSemaphore.release();
+    SharedResources.cpuSemaphore.release();
 }
 ```
 
@@ -207,50 +207,48 @@ It makes sure that threads execute one by one instead of running together. This 
 **What I tested**: Running program multiple times to verify consistent results
 
 **Testing procedure**: 
-```bash
-# Commands used (run the program at least 5 times)
-```
+I ran the program 5 times using the same inputs. Each time I observed the final values such as total waiting time and completed processes.
 
 **Results**: 
-(Show that running multiple times produces consistent, correct results)
+The results were consistent in all runs. The values of counters and logs were correct and did not change randomly.
 
 **Why synchronization is necessary**: 
-(Explain what race conditions COULD occur without synchronization, even if you didn't observe them. Explain which shared resources need protection and why.)
+Without synchronization, race conditions may happen in shared counters and execution log. This can lead to incorrect values or mixed outputs. Since multiple threads access the same variables, protection is required.
 
-**Conclusion**: 
+**Conclusion**: Synchronization ensured stable and correct results across multiple runs
 
 ---
 
 ### Test 2: Exception Testing
 **What I tested**: Checking for ConcurrentModificationException
 
-**Testing procedure**: 
+**Testing procedure**: I ran the program with multiple threads updating the execution log at the same time.
 
-**Results**: 
+**Results**: No exceptions occurred during execution. The program ran smoothly without errors.
 
-**What this proves**: 
+**What this proves**: This shows that synchronization on executionLog is working correctly and prevents concurrent modification issues.
 
 ---
 
 ### Test 3: Correctness Verification
 **What I tested**: Verifying correct final values (total burst time, context switches, etc.)
 
-**Expected values**: 
+**Expected values**: Total completed processes should equal number of processes. Waiting time should be calculated correctly.
 
-**Actual values**: 
+**Actual values**: The output matched the expected values in all runs. Counters were accurate and consistent.
 
-**Analysis**: 
+**Analysis**: This confirms that synchronization using locks works correctly and prevents incorrect updates.
 
 ---
 
 ### Test 4: Different Scenarios
 **Scenario tested**: [e.g., different time quantum, more processes, etc.]
 
-**Purpose**: 
+**Purpose**: To check how the scheduler behaves under different conditions.
 
-**Results**: 
+**Results**: The program handled different values correctly without errors. The scheduling behavior changed as expected.
 
-**What I learned**: 
+**What I learned**: I learned that synchronization still works correctly even when program conditions change.
 
 ---
 
