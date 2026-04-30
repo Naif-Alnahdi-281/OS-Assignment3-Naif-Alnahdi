@@ -130,19 +130,24 @@ But the problem is it reduces performance because threads wait even if they use 
 
 ### Critical Section #1: Counter Variables
 
-**Which variables**: 
+**Which variables**: contextSwitchCount, completedProcessCount, totalWaitingTime
 
-**Why they need protection**: 
+**Why they need protection**: These variables are shared between multiple threads. Each thread updates them during execution. Without protection, values can become incorrect (race condition).
 
-**Synchronization mechanism used**: 
+**Synchronization mechanism used**: ReentrantLock
 
 **Code snippet**:
 ```java
-// Paste your implementation here
+// lock.lock();
+try {
+    contextSwitchCount++;
+} finally {
+    lock.unlock();
+}Paste your implementation here
 ```
 
 **Justification**: 
-
+I used a lock to make sure only one thread updates the variables at a time. This prevents race conditions and keeps the values correct.
 ---
 
 ### Critical Section #2: Execution Log
