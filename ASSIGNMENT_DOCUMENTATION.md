@@ -87,17 +87,18 @@ Time spent:
 - What incorrect behavior could occur?
 
 **Your Answer**:
+First race condition is in shared counters like contextSwitchCount and totalWaitingTime. More than one thread can update them at the same time. This makes the value wrong because increment is not safe. Two threads
 
-[Your answer here - 4-6 sentences with code examples]
-
+Second race condition is in executionLog. The code uses ArrayList which is not thread-safe. If multiple threads add at the same time, logs can mix or some messages disappear. This makes the output not correct
 ---
 
 ### Question 2: Locks vs Semaphores
 **Q**: Explain the difference between ReentrantLock and Semaphore. Where did you use each in your code and why?
 
 **Your Answer**:
+ReentrantLock is used to protect critical sections so only one thread accesses shared data at a time. Semaphore is used to control how many threads can access a resource.
 
-[Your answer here - explain your implementation choices]
+In my code, I used Lock to protect counters and execution log. I used Semaphore to allow only one thread to use the CPU at a time.
 
 ---
 
@@ -105,8 +106,9 @@ Time spent:
 **Q**: What is deadlock? Explain TWO prevention techniques and what you did to prevent deadlocks in your code.
 
 **Your Answer**:
+Deadlock is when threads wait for each other and never continue.
 
-[Your answer here - reference try-finally blocks, lock ordering, etc.]
+One prevention technique is using try-finally to always release locks. Another is avoiding multiple locks to prevent circular waiting. In my code, I used try-finally and avoided nested locks.
 
 ---
 
@@ -118,8 +120,9 @@ Time spent:
 - Given that the three counters are independent, which approach provides better concurrency and why?
 
 **Your Answer**:
+I used one lock for all shared variables. This is called coarse-grained locking. It is easier and safer because everything is protected. It reduces mistakes in synchronization.
 
-[Your answer here - explain coarse-grained vs fine-grained locking, independence of counters, concurrency implications. Show understanding of when to use each approach. 5-8 sentences expected.]
+But the problem is it reduces performance because threads wait even if they use different variables. Fine-grained locking is faster but more complicated. I chose this way because it is simpler and works correctly.
 
 ---
 
