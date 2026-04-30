@@ -152,36 +152,47 @@ I used a lock to make sure only one thread updates the variables at a time. This
 
 ### Critical Section #2: Execution Log
 
-**What resource**: 
+**What resource**: executionLog (ArrayList)
 
-**Why it needs protection**: 
+**Why it needs protection**: ArrayList is not thread-safe. If multiple threads add messages at the same time, the log can be corrupted or some messages may be lost.
 
-**Synchronization mechanism used**: 
+**Synchronization mechanism used**: ReentrantLock
 
 **Code snippet**:
 ```java
-// Paste your implementation here
+// lock.lock();
+try {
+    executionLog.add(message);
+} finally {
+    lock.unlock();
+}Paste your implementation here
 ```
 
 **Justification**: 
-
+Using a lock ensures that log messages are added in a safe and ordered way. This avoids mixed or missing outputs.
 ---
 
 ### Critical Section #3: CPU Semaphore
 
-**Purpose of semaphore**: 
+**Purpose of semaphore**: To control how many threads can access the CPU at the same time
 
-**Number of permits and why**: 
+**Number of permits and why**: 1 permit to simulate a single CPU (only one thread executes at a time).
 
 **Where implemented**: 
+Inside the run() method in the Process class.
 
 **Code snippet**:
 ```java
-// Paste your implementation here
+// PcpuSemaphore.acquire();
+try {
+    // process execution
+} finally {
+    cpuSemaphore.release();
+}aste your implementation here
 ```
 
 **Effect on program behavior**: 
-
+It makes sure that threads execute one by one instead of running together. This reduces interference and keeps execution correct.
 ---
 
 ## Part 4: Testing and Verification (2 marks)
