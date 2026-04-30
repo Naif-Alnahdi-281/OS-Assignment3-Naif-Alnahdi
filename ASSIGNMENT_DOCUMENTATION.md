@@ -138,12 +138,14 @@ But the problem is it reduces performance because threads wait even if they use 
 
 **Code snippet**:
 ```java
-// lock.lock();
-try {
-    contextSwitchCount++;
-} finally {
-    lock.unlock();
-}Paste your implementation here
+ public static void incrementContextSwitch() {
+        contextSwitchLock.lock();
+        try {
+            contextSwitchCount++;
+        } finally {
+            contextSwitchLock.unlock();
+        }
+    }
 ```
 
 **Justification**: 
@@ -160,12 +162,14 @@ I used a lock to make sure only one thread updates the variables at a time. This
 
 **Code snippet**:
 ```java
-// lock.lock();
-try {
-    executionLog.add(message);
-} finally {
-    lock.unlock();
-}Paste your implementation here
+public static void logExecution(String message) {
+        logLock.lock();
+        try {
+            executionLog.add(message);
+        } finally {
+            logLock.unlock();
+        }
+    }
 ```
 
 **Justification**: 
@@ -183,12 +187,14 @@ Inside the run() method in the Process class.
 
 **Code snippet**:
 ```java
+public static final Semaphore cpuSemaphore = new Semaphore(1);
+
 // PcpuSemaphore.acquire();
 try {
     // process execution
 } finally {
     cpuSemaphore.release();
-}aste your implementation here
+}
 ```
 
 **Effect on program behavior**: 
