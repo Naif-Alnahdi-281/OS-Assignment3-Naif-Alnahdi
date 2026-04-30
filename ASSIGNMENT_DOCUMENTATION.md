@@ -275,7 +275,7 @@ Synchronization is like organizing access to a shared resource. If many people w
 
 ## Part 6: GitHub Repository Information
 
-**Repository URL**: 
+**Repository URL**: https://github.com/Naif-Alnahdi-281/OS-Assignment3-Naif-Alnahdi.git
 
 **Number of commits**: 
 
