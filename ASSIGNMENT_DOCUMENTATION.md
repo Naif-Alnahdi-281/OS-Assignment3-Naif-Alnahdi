@@ -277,28 +277,30 @@ Synchronization is like organizing access to a shared resource. If many people w
 
 **Repository URL**: https://github.com/Naif-Alnahdi-281/OS-Assignment3-Naif-Alnahdi.git
 
-**Number of commits**: 
+**Number of commits**: 6
 
 **Commit messages**: 
-1. 
-2. 
-3. 
-4. 
+1. set my student ID: 445050281
+2. add semaphore and mutex lock
+3. add incrementContextSwitch
+4. add any locks
+5. add Acquire CPU semaphore
+6. complete runToCompletion
 
 ---
 
 ## Summary
 
-**Total time spent on assignment**: 
+**Total time spent on assignment**: 5.5 hours
 
 **Key takeaways**: 
-1. 
-2. 
-3. 
+1. Understanding synchronization in multithreading
+2. Using ReentrantLock and Semaphore correctly
+3. Preventing race conditions and ensuring correct results
 
-**Most challenging aspect**: 
+**Most challenging aspect**: Figuring out where to place locks and handling shared resources correctly
 
-**What I'm most proud of**: 
+**What I'm most proud of**: Successfully implementing synchronization and getting consistent correct results
 
 ---
 
