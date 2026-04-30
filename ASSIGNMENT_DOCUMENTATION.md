@@ -28,74 +28,56 @@
 ---
 
 ## Part 1: Development Log (1 mark)
+Entry 1 - [April 29, 6:00 PM]
 
-Document your development process with **minimum 3 entries** showing progression:
+What I implemented:
+I started analyzing the given code and identified shared resources like counters and execution log.
 
-### Entry 1 - [Date, Time]
-**What I implemented**: 
+Challenges encountered:
+I noticed that multiple threads were updating variables like contextSwitchCount and totalWaitingTime at the same time which caused incorrect values.
 
-**Challenges encountered**: 
+How I solved it:
+I decided to use ReentrantLock to protect these shared variables.
 
-**How I solved it**: 
+Testing approach:
+Ran the program multiple times and compared results.
 
-**Testing approach**: 
+Time spent:
+1 hour
 
-**Time spent**: 
+Entry 2 - [April 30, 7:00 PM]
 
----
+What I implemented:
+Added locks to critical sections such as incrementing counters and updating execution log.
 
-### Entry 2 - [Date, Time]
-**What I implemented**: 
+Challenges encountered:
+I was confused about where exactly to place the lock, especially inside methods like incrementContextSwitch() and logExecution().
 
-**Challenges encountered**: 
+How I solved it:
+I wrapped only the critical code inside lock and used try-finally to ensure unlock always happens.
 
-**How I solved it**: 
+Testing approach:
+Printed values before and after adding locks to confirm correctness.
 
-**Testing approach**: 
+Time spent:
+1.5 hours
 
-**Time spent**: 
+Entry 3 - [April 30, 8:30 PM]
 
----
+What I implemented:
+Implemented Semaphore to control CPU access (only one thread runs at a time).
 
-### Entry 3 - [Date, Time]
-**What I implemented**: 
+Challenges encountered:
+At first, threads were still interfering because I forgot to release the semaphore.
 
-**Challenges encountered**: 
+How I solved it:
+Used acquire() before execution and release() inside finally block.
 
-**How I solved it**: 
+Testing approach:
+Checked that threads execute one by one and no overlap happens.
 
-**Testing approach**: 
-
-**Time spent**: 
-
----
-
-### Entry 4 - [Date, Time]
-**What I implemented**: 
-
-**Challenges encountered**: 
-
-**How I solved it**: 
-
-**Testing approach**: 
-
-**Time spent**: 
-
----
-
-### Entry 5 - [Date, Time]
-**What I implemented**: 
-
-**Challenges encountered**: 
-
-**How I solved it**: 
-
-**Testing approach**: 
-
-**Time spent**: 
-
----
-
+Time spent:
+1 hour
 ## Part 2: Technical Questions (1 mark)
 
 ### Question 1: Race Conditions
