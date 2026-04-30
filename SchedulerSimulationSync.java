@@ -43,11 +43,7 @@ class SharedResources {
     public static long totalWaitingTime = 0;       // Shared accumulator - NEEDS PROTECTION!
     public static List<String> executionLog = new ArrayList<>();  // Shared list - NEEDS PROTECTION!
     
-    // TODO #1: Add a ReentrantLock(s) here to protect critical sections
-    // Example: public static final ReentrantLock lock = new ReentrantLock();
     
-    // TODO #2: Add a Semaphore to limit concurrent process execution
-    // Example: public static final Semaphore cpuSemaphore = new Semaphore(1);
     
     // Method to increment context switch counter
     public static void incrementContextSwitch() {
@@ -113,9 +109,8 @@ class Process implements Runnable {
     
     @Override
     public void run() {
-        // TODO #3: Acquire CPU semaphore before executing
-        // This ensures only allowed number of processes run simultaneously
-        
+        try {
+            SharedResources.cpuSemaphore.acquire();
         try {
             if (startTime == -1) {
                 startTime = System.currentTimeMillis();
@@ -175,9 +170,11 @@ class Process implements Runnable {
             }
             System.out.println();
             
-        } finally {
-            // TODO #4: Release CPU semaphore here
-            // Always release in finally block to prevent deadlocks!
+      } finally {
+                SharedResources.cpuSemaphore.release();
+            }
+        } catch (InterruptedException e) {
+            System.out.println(Colors.RED + "  ✗ " + name + " semaphore interrupted." + Colors.RESET);
         }
     }
     
