@@ -2,7 +2,7 @@
 
 **Student Name**: [Naif Abdulaziz Alnahdi]  
 **Student ID**: [445050281]  
-**Date Submitted**: [30 April]
+**Date Submitted**: [1 May]
 
 ---
 
@@ -14,9 +14,9 @@
 > Set sharing to "Anyone with the link can view".
 > Test the link in incognito/private mode before submitting.
 
-**Video Link**: [Paste your personal Gmail Google Drive link here]
+**Video Link**: [https://drive.google.com/file/d/1VovfdbADQYzGPAe52Ie5QUtWZd0s0dz5/view?usp=drivesdk]
 
-**Video filename**: `[YourStudentID]_Assignment3_Synchronization.mp4`
+**Video filename**: `445050281_Assignment3_Synchronization.mp4`
 
 **Verification**:
 - [ ] Link is accessible (tested in incognito mode)
